@@ -102,8 +102,21 @@ export default {
     const ptr = PullToRefresh.init({
       mainElement: ".hybus",
       instructionsPullToRefresh: "아래로 당겨서 새로고침",
-      instructionsReleaseToRefresh: "새로고침을 하려면 화면을 놓아주세요",
-      instructionsRefreshing: "시간표를 불러오는 중",
+      instructionsReleaseToRefresh: "새로고침을 하려면 화면을 놓아주세요!",
+      instructionsRefreshing: "시간표를 불러오는 중...",
+
+    // distThreshold: 80,   // 페이지 갱신이 가능해지는 높이
+    // distMax: 150,   // 최대로 당겨지는(벌어지는) 높이
+    // distReload: 60,   // 갱신 중 잠깐 멈추면서 보여지는 높이
+    // iconArrow: '&#8675;',   // 페이지 갱신 가능 전 기본으로 보여지는 화살표
+    // iconRefreshing: '&hellip;',    // 페이지 갱신이 가능할 때 보여지는 화살표
+    // refreshTimeout: 500,  // 갱신 시 노출 시간
+
+    // mainElement: 'body',   // 갱신 페이지가 적용되는 부분
+    // instructionsPullToRefresh: 'Pull down to refresh',   // 페이지를 당기면 바로 보여지는 메시지
+    // instructionsReleaseToRefresh: 'Release to refresh',   // 페이지 갱신이 가능할 때 보여지는 메시지
+    // instructionsRefreshing: 'Refreshing',   // 갱신중에 보여지는 메시지
+
       refresh() {
         this.$router.go();
       }
@@ -175,4 +188,53 @@ export default {
 .slide {
   box-shadow: 0 0 2.142rem 0.142rem rgba(0, 0, 0, 0.15);
 }
+
+
+.__PREFIX__ptr {
+  box-shadow: inset 0 -3px 5px rgba(231, 10, 10, 0.877) !important;
+  pointer-events: none;
+  font-size: 0.85em;
+  font-weight: bold;
+  top: 0;
+  height: 0;
+  transition: height 0.3s, min-height 0.3s;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  align-content: stretch;
+}
+
+.__PREFIX__box {
+  padding: 10px;
+  flex-basis: 100%;
+}
+
+.__PREFIX__pull {
+  transition: none;
+}
+
+.__PREFIX__text {
+  margin-top: .33em;
+  color: rgba(224, 81, 81, 0.904);
+}
+
+.__PREFIX__icon {
+  color: rgba(156, 60, 60, 0.884);
+  transition: transform .3s;
+}
+
+/*
+When at the top of the page, disable vertical overscroll so passive touch
+listeners can take over.
+*/
+.__PREFIX__top {
+  touch-action: pan-x pan-down pinch-zoom;
+}
+
+.__PREFIX__release .__PREFIX__icon {
+  transform: rotate(180deg);
+}
+
 </style>
