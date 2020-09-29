@@ -13,6 +13,7 @@ export default `
   display: flex;
   align-items: flex-end;
   align-content: stretch;
+
   background: #303030;
 }
 
@@ -27,11 +28,13 @@ export default `
 
 .__PREFIX__text {
   margin-top: .33em;
-  color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  // color: rgba(0, 0, 0, 0.3);
 }
 
 .__PREFIX__icon {
-  color: rgba(0, 0, 0, 0.3);
+  // color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
   transition: transform .3s;
 }
 
