@@ -56,9 +56,7 @@ import Banner from "./Banner.vue";
 import PullToRefresh from "pulltorefreshjs";
 import Footer from "./Footer.vue";
 import ChangeLog from "./ChangeLog.vue";
-
-// 추가된 코드
-import _ptrStyles from './styles';
+import {getPtrStyles} from './styles';
 
 export default {
   name: "Home",
@@ -98,28 +96,17 @@ export default {
   },
   mounted() {
     setTimeout(this.animateNextBox, 100);
+    if (this.theme === 'dark') {
+      const appElement = document.getElementById('app')
+      appElement.style.backgroundColor = '#303030'
+    }
     const ptr = PullToRefresh.init({
       mainElement: ".hybus",
       instructionsPullToRefresh: "아래로 당겨서 새로고침",
       instructionsReleaseToRefresh: "새로고침을 하려면 화면을 놓아주세요!",
       instructionsRefreshing: "시간표를 불러오는 중...",
 
-      // 추가된 코드
-      getStyles: () => _ptrStyles,
-
-      // getStyles() {
-      // },
-      // distThreshold: 80,   // 페이지 갱신이 가능해지는 높이
-      // distMax: 150,   // 최대로 당겨지는(벌어지는) 높이
-      // distReload: 60,   // 갱신 중 잠깐 멈추면서 보여지는 높이
-      // iconArrow: '&#8675;',   // 페이지 갱신 가능 전 기본으로 보여지는 화살표
-      // iconRefreshing: '&hellip;',    // 페이지 갱신이 가능할 때 보여지는 화살표
-      // refreshTimeout: 500,  // 갱신 시 노출 시간
-
-      // mainElement: 'body',   // 갱신 페이지가 적용되는 부분
-      // instructionsPullToRefresh: 'Pull down to refresh',   // 페이지를 당기면 바로 보여지는 메시지
-      // instructionsReleaseToRefresh: 'Release to refresh',   // 페이지 갱신이 가능할 때 보여지는 메시지
-      // instructionsRefreshing: 'Refreshing',   // 갱신중에 보여지는 메시지
+      getStyles: () => getPtrStyles(this.theme),
 
       refresh() {
         this.$router.go();
